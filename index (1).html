@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة شاملة — التنظيم القضائي 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f14;
+  --bg2: #13161e;
+  --bg3: #1a1e28;
+  --card: #1e2232;
+  --card2: #242840;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #e8eaf2;
+  --text2: #9aa0b8;
+  --text3: #5a6080;
+  --accent: #6c8fff;
+  --accent2: #4a6ee0;
+  --green: #3ecf8e;
+  --amber: #f5a623;
+  --red: #ff6b6b;
+  --purple: #a78bfa;
+  --teal: #2dd4bf;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'IBM Plex Sans Arabic',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  padding:4rem 2rem 3rem;
+  text-align:center;
+  overflow:hidden;
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(108,143,255,0.12) 0%, transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(108,143,255,0.12);
+  border:0.5px solid rgba(108,143,255,0.3);
+  border-radius:20px;padding:4px 14px;
+  font-size:12px;color:var(--accent);
+  margin-bottom:1.5rem;letter-spacing:.5px;
+}
+.hero h1{
+  font-family:'Amiri',serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:700;
+  line-height:1.3;
+  background:linear-gradient(135deg,#fff 30%,var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.75rem;
+}
+.hero p{font-size:1rem;color:var(--text2);max-width:500px;margin:0 auto 2rem;line-height:1.7}
+.stats-row{
+  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+  margin-bottom:2rem;
+}
+.stat{text-align:center}
+.stat-n{font-size:1.8rem;font-weight:600;color:#fff}
+.stat-l{font-size:11px;color:var(--text3);margin-top:2px;letter-spacing:.5px}
+
+/* ── TABS ── */
+.tabs-wrap{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,15,20,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:0.5px solid var(--border);
+  padding:.75rem 1.5rem;
+}
+.tabs{
+  display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;
+  scrollbar-width:none;max-width:1100px;margin:0 auto;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  white-space:nowrap;
+  padding:7px 18px;
+  border-radius:20px;
+  border:0.5px solid var(--border2);
+  background:transparent;
+  color:var(--text2);
+  font-size:13px;
+  cursor:pointer;
+  font-family:'IBM Plex Sans Arabic',sans-serif;
+  transition:all .2s;
+  flex-shrink:0;
+}
+.tab:hover{background:var(--bg3);color:var(--text)}
+.tab.active{
+  background:var(--accent2);
+  border-color:var(--accent);
+  color:#fff;font-weight:500;
+}
+
+/* ── MAIN ── */
+main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.panel{display:none;animation:fadeUp .35s ease}
+.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CARDS ── */
+.card{
+  background:var(--card);
+  border:0.5px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  margin-bottom:1rem;
+  transition:border-color .2s;
+}
+.card:hover{border-color:var(--border2)}
+.card-title{
+  font-size:15px;font-weight:600;
+  color:#fff;
+  margin-bottom:1rem;
+  padding-bottom:.75rem;
+  border-bottom:0.5px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.card-title .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+}
+
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+
+.mini{
+  background:var(--bg3);
+  border:0.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:.85rem;
+}
+.mini strong{display:block;font-size:12.5px;font-weight:500;color:#fff;margin-bottom:.3rem}
+.mini span{font-size:12px;color:var(--text2);line-height:1.7}
+
+/* ── BADGES ── */
+.badge{
+  display:inline-block;font-size:11px;padding:2px 9px;
+  border-radius:10px;font-weight:500;margin-right:6px;
+}
+.badge-blue{background:rgba(108,143,255,0.15);color:var(--accent);border:0.5px solid rgba(108,143,255,0.3)}
+.badge-green{background:rgba(62,207,142,0.12);color:var(--green);border:0.5px solid rgba(62,207,142,0.25)}
+.badge-amber{background:rgba(245,166,35,0.12);color:var(--amber);border:0.5px solid rgba(245,166,35,0.25)}
+.badge-red{background:rgba(255,107,107,0.12);color:var(--red);border:0.5px solid rgba(255,107,107,0.25)}
+.badge-purple{background:rgba(167,139,250,0.12);color:var(--purple);border:0.5px solid rgba(167,139,250,0.25)}
+
+/* ── HIGHLIGHT ── */
+.hl{
+  background:rgba(245,166,35,0.07);
+  border-right:3px solid var(--amber);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:.7rem 1rem;
+  font-size:13px;
+  color:var(--text2);
+  margin:.75rem 0;
+  line-height:1.8;
+}
+.hl strong{color:var(--amber)}
+
+.hl-blue{
+  background:rgba(108,143,255,0.07);
+  border-right:3px solid var(--accent);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:.7rem 1rem;
+  font-size:13px;color:var(--text2);margin:.75rem 0;line-height:1.8;
+}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;margin-top:.5rem}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{
+  background:var(--bg3);font-weight:500;
+  padding:9px 10px;
+  border:0.5px solid var(--border);
+  color:var(--text2);text-align:right;font-size:12px;
+}
+td{
+  padding:8px 10px;
+  border:0.5px solid var(--border);
+  color:var(--text2);line-height:1.65;
+}
+tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* ── LISTS ── */
+ul,ol{padding-right:1.3rem;font-size:13px;line-height:1.9;color:var(--text2)}
+li{margin-bottom:.15rem}
+p.body{font-size:13px;line-height:1.85;color:var(--text2);margin-bottom:.6rem}
+
+/* ── SECTION TITLE ── */
+.sec{
+  font-size:13px;font-weight:600;
+  color:var(--accent);
+  margin:.85rem 0 .5rem;
+  letter-spacing:.3px;
+}
+
+/* ── PYRAMID ── */
+.pyramid{margin:1rem 0}
+.prow{
+  display:flex;align-items:center;justify-content:center;
+  border-radius:var(--radius-sm);
+  padding:10px 16px;
+  font-size:13px;font-weight:500;
+  margin:5px auto;
+  text-align:center;
+}
+
+/* ── PYRAMID 2-COL ── */
+.pyramid-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+@media(max-width:600px){.pyramid-split{grid-template-columns:1fr}}
+.pside{display:flex;flex-direction:column;gap:5px;align-items:center}
+.pside-label{font-size:11px;color:var(--text3);text-align:center;margin-top:4px;letter-spacing:.4px}
+
+/* ── Q&A ── */
+.qa{
+  border:0.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  margin-bottom:8px;overflow:hidden;
+  transition:border-color .2s;
+}
+.qa:hover{border-color:var(--border2)}
+.qa-q{
+  padding:.8rem 1.1rem;
+  cursor:pointer;
+  font-size:13.5px;font-weight:500;
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--bg3);color:#fff;
+  user-select:none;gap:10px;
+}
+.qa-q .arr{
+  font-size:11px;color:var(--text3);
+  flex-shrink:0;
+  transition:transform .25s;
+}
+.qa.open .arr{transform:rotate(180deg);color:var(--accent)}
+.qa-a{
+  padding:.85rem 1.1rem;
+  font-size:13px;line-height:1.85;
+  color:var(--text2);
+  display:none;
+  border-top:0.5px solid var(--border);
+  background:var(--card);
+}
+.qa.open .qa-a{display:block}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:2rem;
+  border-top:0.5px solid var(--border);
+  font-size:12px;color:var(--text3);
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div style="position:relative;z-index:1">
+    <div class="hero-badge">⚖️ &nbsp; القانون العضوي 22/10</div>
+    <h1>التنظيم القضائي الجزائري</h1>
+    <p>مراجعة شاملة ومنظّمة لمادة التنظيم القضائي 2 — كل ما تحتاجه للامتحان في مكان واحد</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n" style="color:var(--accent)">3</div><div class="stat-l">محاور رئيسية</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--green)">10+</div><div class="stat-l">أقسام مفصّلة</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--amber)">12</div><div class="stat-l">سؤال للامتحان</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--red)">20/20</div><div class="stat-l">الهدف</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab active" onclick="show('intro',this)">🗺️ نظرة عامة</div>
+    <div class="tab" onclick="show('court1',this)">🏛️ المحكمة</div>
+    <div class="tab" onclick="show('council',this)">⚖️ المجلس القضائي</div>
+    <div class="tab" onclick="show('supreme',this)">👑 المحكمة العليا</div>
+    <div class="tab" onclick="show('special',this)">🔒 جهات متخصصة</div>
+    <div class="tab" onclick="show('admin',this)">📋 القضاء الإداري</div>
+    <div class="tab" onclick="show('conflict',this)">⚡ محكمة التنازع</div>
+    <div class="tab" onclick="show('qa',this)">🎯 أسئلة الامتحان</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== INTRO ===== -->
+<div id="p-intro" class="panel active">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> هيكل التنظيم القضائي الجزائري</div>
+    <p class="body">يتكون النظام القضائي من ثلاثة محاور رئيسية وفق القانون العضوي 22/10 المتعلق بالتنظيم القضائي:</p>
+
+    <div class="pyramid">
+      <div class="prow" style="width:60%;background:rgba(255,107,107,0.12);color:var(--red);border:0.5px solid rgba(255,107,107,0.25)">⚡ محكمة التنازع — تفصل بين القضائين</div>
+      <div class="pyramid-split">
+        <div class="pside">
+          <div class="prow" style="width:100%;background:rgba(108,143,255,0.12);color:var(--accent);border:0.5px solid rgba(108,143,255,0.25)">👑 مجلس الدولة</div>
+          <div class="prow" style="width:100%;background:var(--bg3);color:var(--text2);border:0.5px solid var(--border);font-size:12px">المحاكم الإدارية الاستئنافية</div>
+          <div class="prow" style="width:100%;background:var(--bg3);color:var(--text2);border:0.5px solid var(--border);font-size:12px">المحاكم الإدارية</div>
+          <div class="pside-label">القضاء الإداري</div>
+        </div>
+        <div class="pside">
+          <div class="prow" style="width:100%;background:rgba(108,143,255,0.12);color:var(--accent);border:0.5px solid rgba(108,143,255,0.25)">👑 المحكمة العليا</div>
+          <div class="prow" style="width:100%;background:var(--bg3);color:var(--text2);border:0.5px solid var(--border);font-size:12px">المجالس القضائية</div>
+          <div class="prow" style="width:100%;background:var(--bg3);color:var(--text2);border:0.5px solid var(--border);font-size:12px">المحاكم (الدرجة الأولى)</div>
+          <div class="pside-label">القضاء العادي</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> المحاور الثلاثة — خريطة المادة</div>
+    <div class="grid3">
+      <div class="mini">
+        <strong>المحور الأول — القضاء العادي</strong>
+        <span>المحاكم، المجالس القضائية، المحكمة العليا، الجهات المتخصصة (جنايات، عسكري، تجاري، أقطاب)</span>
+      </div>
+      <div class="mini">
+        <strong>المحور الثاني — القضاء الإداري</strong>
+        <span>المحاكم الإدارية، المحاكم الاستئنافية الإدارية، مجلس الدولة</span>
+      </div>
+      <div class="mini">
+        <strong>المحور الثالث — محكمة التنازع</strong>
+        <span>تنظيمها، اختصاصاتها، إجراءاتها — تفصل بين القضاء العادي والإداري</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> نصائح للامتحان</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>🔑 المفاهيم الذهبية</strong>
+        <span>المحكمة العليا = قانون لا وقائع. غرفة الاتهام = 9 مهام. محكمة التنازع = 9 قضاة. المجلس القضائي = جماعي دائماً.</span>
+      </div>
+      <div class="mini">
+        <strong>⚠️ الأخطاء الشائعة</strong>
+        <span>لا تخلط بين المحكمة العليا (نقض) والمجلس القضائي (استئناف). القسم الاجتماعي جماعي لا فردي. محافظ الدولة في القضاء الإداري لا وكيل الجمهورية.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== COURT 1 ===== -->
+<div id="p-court1" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> المحكمة <span class="badge badge-blue">درجة أولى</span></div>
+    <p class="body">المحكمة هي الجهة القضائية في قاعدة الهرم القضائي العادي. تغطي بلدية أو أكثر. هيئة الحكم من <strong>قاضٍ فرد</strong> — ما عدا القضايا الاجتماعية، قسم الأحداث، والجهات المتخصصة التي تكون جماعية.</p>
+
+    <div class="sec">أولاً: التشكيلة البشرية (م.20 من ق.ع 22/10)</div>
+    <div class="grid3">
+      <div class="mini">
+        <strong>1. قضاة الحكم</strong>
+        <span>رئيس المحكمة، القضاة، قاضي التحقيق، قاضي الأحداث، قاضي تطبيق العقوبات</span>
+      </div>
+      <div class="mini">
+        <strong>2. النيابة العامة</strong>
+        <span>وكيل الجمهورية + وكلاء جمهورية مساعدون</span>
+      </div>
+      <div class="mini">
+        <strong>3. كتابة الضبط</strong>
+        <span>تسيّر الملفات والإجراءات الإدارية للمحكمة</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> ثانياً: أقسام المحكمة</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr>
+          <th>القسم</th><th>التشكيلة</th><th>الاختصاص والملاحظات</th>
+        </tr>
+        <tr><td>المدني</td><td><span class="badge badge-blue">فردي</span></td><td>الالتزامات، العقود المدنية، المسؤولية المدنية</td></tr>
+        <tr><td>شؤون الأسرة</td><td><span class="badge badge-blue">فردي</span></td><td>الزواج، الطلاق، النفقة، الحضانة، الكفالة، الولاية، النسب</td></tr>
+        <tr><td>الاجتماعي</td><td><span class="badge badge-amber">جماعي</span></td><td>عقود العمل، الضمان الاجتماعي، التقاعد — آجل 6 أشهر من محضر عدم الصلح</td></tr>
+        <tr><td>العقاري</td><td><span class="badge badge-blue">فردي</span></td><td>حق الملكية، الحيازة، الملكية المشتركة والشيوع</td></tr>
+        <tr><td>التجاري</td><td><span class="badge badge-blue">فردي</span></td><td>منازعات التجار، الشركات التجارية</td></tr>
+        <tr><td>البحري</td><td><span class="badge badge-blue">فردي</span></td><td>العقود البحرية — موجود في دوائر الموانئ فقط</td></tr>
+        <tr><td>الاستعجالي</td><td><span class="badge badge-blue">بأمر</span></td><td>مسائل مستعجلة مؤقتة دون المساس بأصل الحق — معجل النفاذ</td></tr>
+        <tr><td>الجنح والمخالفات</td><td><span class="badge badge-blue">فردي</span></td><td>جرائم البالغين (+18 سنة)</td></tr>
+        <tr><td>الأحداث</td><td><span class="badge badge-amber">جماعي</span></td><td>جرائم الأطفال 10-18 سنة — جلسات سرية — محامٍ وجوبي</td></tr>
+        <tr><td>تطبيق العقوبات</td><td><span class="badge badge-purple">متخصص</span></td><td>الإفراج المشروط، الحرية النصفية، المراقبة الإلكترونية</td></tr>
+      </table>
+    </div>
+    <div class="hl">⚠️ القسم الاجتماعي يفصل كأول وآخر درجة في بعض القضايا (نهائي غير قابل للاستئناف)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> ثالثاً: الاختصاص</div>
+
+    <div class="sec">1. الاختصاص النوعي</div>
+    <p class="body">المحكمة ذات الاختصاص العام — تنظر في جميع القضايا إلا ما استُثني بنص خاص. الأحكام ابتدائية قابلة للاستئناف عموماً.</p>
+
+    <div class="sec">2. الاختصاص الإقليمي (م.37 إ.م.إ.)</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>القاعدة العامة</strong>
+        <span>موطن المدعى عليه. إذا تعدد فموطن أحدهم.</span>
+      </div>
+      <div class="mini">
+        <strong>اختياري (م.39)</strong>
+        <span>الدعاوى المختلطة، التعويض، المنازعات التجارية، البريد...</span>
+      </div>
+      <div class="mini">
+        <strong>وجوبي (م.40)</strong>
+        <span>العقار، الميراث، الإفلاس، الملكية الفكرية، الخدمات الطبية، الحجز...</span>
+      </div>
+      <div class="mini">
+        <strong>الجزائي</strong>
+        <span>مكان وقوع الجريمة أو القبض أو الإقامة</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COUNCIL ===== -->
+<div id="p-council" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> المجلس القضائي <span class="badge badge-green">درجة ثانية</span></div>
+    <p class="body">درجة الاستئناف في الهرم القضائي العادي. تتشكل كل غرفة من <strong>3 قضاة</strong> (2 منهم برتبة مستشار على الأقل) — تشكيلة جماعية دائماً.</p>
+
+    <div class="sec">التركيبة البشرية</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>قضاة الحكم</strong>
+        <span>رئيس المجلس (ونائباه عند الاقتضاء)، رؤساء الغرف، المستشارون</span>
+      </div>
+      <div class="mini">
+        <strong>النيابة العامة</strong>
+        <span>النائب العام + نواب عامون مساعدون</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> غرف المجلس القضائي</div>
+    <div class="grid2">
+      <div>
+        <div class="sec">القضايا المدنية</div>
+        <ul>
+          <li>الغرفة المدنية</li>
+          <li>الغرفة الاجتماعية</li>
+          <li>غرفة شؤون الأسرة</li>
+          <li>الغرفة العقارية</li>
+          <li>الغرفة التجارية</li>
+          <li>الغرفة البحرية</li>
+          <li>الغرفة الاستعجالية</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sec">القضايا الجزائية</div>
+        <ul>
+          <li>الغرفة الجزائية (جنح ومخالفات)</li>
+          <li>غرفة الأحداث</li>
+          <li>غرفة تطبيق العقوبات</li>
+          <li>غرفة الاتهام <span class="badge badge-red">مهمة جداً</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hl" style="margin-top:1rem">
+      <strong>غرفة الاتهام — المهام التسع:</strong><br>
+      ① مراقبة أعمال الضبطية القضائية<br>
+      ② البت في طلبات رد الاعتبار<br>
+      ③ الإشراف على مكاتب التحقيق ومراقبة الحبس المؤقت<br>
+      ④ مراجعة إجراءات التحقيق والبت في البطلان<br>
+      ⑤ البت في تنازع الاختصاص بين قضاة التحقيق<br>
+      ⑥ النظر في استئناف أوامر قضاة التحقيق<br>
+      ⑦ درجة ثانية للتحقيق في الجنايات + الإحالة لمحكمة الجنايات<br>
+      ⑧ الإشراف على الحبس المؤقت ومراقبة مراكز الاحتجاز<br>
+      ⑨ البت في الإخلالات المهنية للضبطية القضائية
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> اختصاصات المجلس القضائي</div>
+    <div class="sec">النوعي</div>
+    <ul>
+      <li>النظر في استئناف الأحكام الابتدائية عن المحاكم التابعة له في جميع المواد</li>
+      <li>الفصل في تنازع الاختصاص بين قضاة في دائرته</li>
+      <li>الفصل في طلبات الرد ضد قضاة المحاكم التابعة له</li>
+      <li>طلب الإحالة لوجود شبهة مشروعة تمس حياد الجهة القضائية</li>
+    </ul>
+    <div class="sec" style="margin-top:.85rem">الإقليمي</div>
+    <p class="body">يشمل كافة المحاكم الواقعة في دائرة اختصاصه.</p>
+  </div>
+</div>
+
+<!-- ===== SUPREME ===== -->
+<div id="p-supreme" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> المحكمة العليا <span class="badge badge-red">قمة الهرم العادي</span></div>
+    <p class="body"><strong>ليست درجة ثالثة للتقاضي</strong> — هي محكمة <strong>قانون لا وقائع</strong>. جهة نقض تراقب تطبيق القانون وتضمن توحيد الاجتهاد القضائي. إجراءاتها مكتوبة أمام جميع غرفها.</p>
+    <div class="hl">
+      <strong>⚠️ استثناء — تصبح محكمة موضوع (م.374 إ.م.إ.):</strong><br>
+      — جوازاً: بعد طعن ثانٍ بالنقض<br>
+      — وجوباً: عند الطعن بالنقض للمرة الثالثة
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> التشكيلة البشرية</div>
+    <div class="grid3">
+      <div class="mini">
+        <strong>قضاة الحكم</strong>
+        <span>الرئيس الأول، نائب الرئيس، رؤساء الغرف، رؤساء الأقسام، المستشارون</span>
+      </div>
+      <div class="mini">
+        <strong>النيابة العامة</strong>
+        <span>النائب العام، النائب العام المساعد، المحامون العامون</span>
+      </div>
+      <div class="mini">
+        <strong>كتابة الضبط</strong>
+        <span>أمانة مركزية (يشرف عليها قاضٍ)، أمانات الغرف، أمانة النيابة العامة</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--purple)"></span> غرف المحكمة العليا</div>
+
+    <div class="sec">أ. الغرف العادية (3 قضاة على الأقل — تقرر بالأغلبية)</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>مدنية</strong>
+        <span>الغرفة المدنية، العقارية، الاجتماعية، التجارية والبحرية، شؤون الأسرة والمواريث</span>
+      </div>
+      <div class="mini">
+        <strong>جزائية</strong>
+        <span>الغرفة الجنائية، غرفة الجنح والمخالفات</span>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:.85rem">ب. الغرف الموسعة</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>الغرفة المختلطة</strong>
+        <span>غرفتان على الأقل — حين تطرح مسألة قانونية ستتلقى حلولاً متناقضة. تتداول بحضور 15 عضواً على الأقل.</span>
+      </div>
+      <div class="mini">
+        <strong>الغرفة المجتمعة</strong>
+        <span>الرئيس الأول + نائبه + رؤساء الغرف + رؤساء الأقسام + عميد المستشارين + المستشار المقرر. لا تتداول إلا بحضور نصف الأعضاء. تُعقد عند تغيير الاجتهاد القضائي.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--teal)"></span> الأجهزة غير القضائية</div>
+    <div class="grid3">
+      <div class="mini">
+        <strong>مكتب المحكمة العليا</strong>
+        <span>إعداد النظام الداخلي، إثارة تعارض الاجتهاد، توحيد المصطلحات</span>
+      </div>
+      <div class="mini">
+        <strong>الجمعية العامة</strong>
+        <span>دراسة مسائل عمل المحكمة، المصادقة على النظام الداخلي</span>
+      </div>
+      <div class="mini">
+        <strong>الهياكل الإدارية</strong>
+        <span>أمانة عامة، قسم الإدارة، قسم الوثائق والدراسات، قسم الإحصائيات</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> اختصاصات المحكمة العليا</div>
+    <div class="sec">النوعي</div>
+    <ul>
+      <li>الطعون بالنقض ضد الأحكام والقرارات النهائية للمحاكم والمجالس (عادية واستثنائية)</li>
+      <li>الطعون ضد أحكام أول وآخر درجة وتلك التي تنهي الخصومة (م.350)</li>
+      <li>تنازع الاختصاص بين مجلسين أو محكمتين في مجلسين مختلفين</li>
+      <li>طلبات رد القضاة ضد رؤساء المجالس أو مستشاري المحكمة العليا</li>
+      <li>الإحالة بسبب الشبهة المشروعة ضد مجلس قضائي</li>
+      <li>التماسات النائب العام بالإحالة لأسباب أمنية</li>
+    </ul>
+    <div class="sec" style="margin-top:.85rem">الإقليمي</div>
+    <p class="body">يمتد ليشمل كامل الإقليم الوطني — كل الجهات العادية والاستثنائية.</p>
+  </div>
+</div>
+
+<!-- ===== SPECIAL ===== -->
+<div id="p-special" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> الجهات القضائية المتخصصة</div>
+    <div class="grid2">
+      <div class="mini"><strong>1. محكمة الجنايات</strong><span>جرائم الجنايات والجنح والمخالفات المرتبطة</span></div>
+      <div class="mini"><strong>2. القضاء العسكري</strong><span>الجرائم العسكرية المحضة والمشتركة</span></div>
+      <div class="mini"><strong>3. المحاكم التجارية المتخصصة</strong><span>12 محكمة — منازعات تجارية معينة</span></div>
+      <div class="mini"><strong>4. الأقطاب القضائية الجزائية</strong><span>جرائم خطيرة إقليمياً ووطنياً</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--red)"></span> أولاً: محكمة الجنايات</div>
+    <p class="body">تعقد بمقر المجلس القضائي. دورات انعقاد كل 3 أشهر (قابلة للتمديد).</p>
+
+    <div class="sec">التشكيلة</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>الابتدائية</strong>
+        <span>قاضٍ رئيس (رتبة مستشار) + قاضيان مساعدان + محلفان</span>
+      </div>
+      <div class="mini">
+        <strong>الاستئنافية</strong>
+        <span>قاضٍ رئيس (رتبة رئيس غرفة) + قاضيان مستشاران + محلفان. في جرائم الإرهاب والمخدرات: قضاة فقط بدون محلفين.</span>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:.85rem">إجراءات المحاكمة (7 مراحل)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>المرحلة</th><th>ما يحدث</th></tr>
+        <tr><td>أ. الإجراءات الأولية</td><td>غرفة الاتهام تصدر قرار الإحالة ← النائب العام يرسل الملف مع أدلة الاتهام ← تبليغ المتهم ← جدولة القضية</td></tr>
+        <tr><td>ب. افتتاح الجلسة</td><td>يُحضر المتهم طليقاً ← مناداة المحلفين ← قرعة لاختيار 2 منهم لإتمام التشكيلة</td></tr>
+        <tr><td>ج. المناقشة</td><td>التحقق من هوية المتهم ← قراءة قرار الإحالة ← الرئيس يطرح الأسئلة ← مواجهة المتهم بالأدلة ← سماع الشهود</td></tr>
+        <tr><td>د. المرافعة</td><td>محامي الطرف المدني ← النيابة العامة ← دفاع المتهم. ثم: الرئيس يسأل المتهم إذا أراد إضافة دفوع</td></tr>
+        <tr><td>هـ. إقفال باب المرافعة</td><td>الرئيس يطرح الأسئلة المستخرجة من قرار الإحالة ← قراءة التعليمات للأعضاء</td></tr>
+        <tr><td>و. المداولة</td><td>تصويت سري بالنفي أو الإيجاب على كل سؤال. الأغلبية تقرر. إذا ثبتت الإدانة: مداولة بشأن العقوبة</td></tr>
+        <tr><td>ز. النطق بالحكم</td><td>قراءة الإجابات ← النطق بالعقوبة أو البراءة. تنبيه بمهلة 10 أيام للطعن. براءة = إفراج فوري</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> ثانياً: القضاء العسكري</div>
+    <p class="body">تُنشأ في كل ناحية عسكرية: <strong>محكمة عسكرية + مجلس استئناف عسكري</strong>.</p>
+
+    <div class="grid2" style="margin:.75rem 0">
+      <div class="mini">
+        <strong>جرائم عسكرية محضة</strong>
+        <span>ينص عليها قانون القضاء العسكري فقط: العصيان، الفرار، التحريض على الفرار...</span>
+      </div>
+      <div class="mini">
+        <strong>جرائم عسكرية مشتركة</strong>
+        <span>ينص عليها قانون العسكري وقانون العقوبات معاً (سرقة، تزوير...) — إذا نظرت إحدى الجهتين تتخلى الأخرى.</span>
+      </div>
+    </div>
+
+    <div class="sec">الاختصاص الشخصي (م.25-28)</div>
+    <p class="body">المستخدمون العسكريون والمدنيون بوزارة الدفاع، الفاعلون والشركاء، الأشخاص على متن سفن/طائرات عسكرية، أسرى الحرب.</p>
+
+    <div class="sec">الاختصاص الإقليمي (م.30)</div>
+    <p class="body">مكان ارتكاب الجريمة أو توقيف المتهم أو انتمائه لوحدة في دائرة اختصاص المحكمة.</p>
+
+    <div class="hl">⚠️ إذا كان المتهم برتبة عقيد فأعلى أو قاضياً عسكرياً: وزير الدفاع يعين الجهة القضائية المختصة</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> ثالثاً: المحاكم التجارية المتخصصة</div>
+    <p class="body"><strong>12 محكمة</strong> (المرسوم التنفيذي 53/23): بشار، تامنغست، الجلفة، البليدة، تلمسان، الجزائر، سطيف، عنابة، قسنطينة، مستغانم، ورقلة، وهران.</p>
+    <p class="body">التشكيلة: قاضٍ رئيس + 4 مساعدين أهل دراية بالمسائل التجارية.</p>
+
+    <div class="sec">الاختصاص النوعي (م.536 مكرر 3)</div>
+    <ul>
+      <li>منازعات الملكية الفكرية</li>
+      <li>منازعات الشركات التجارية (خلافات الشركاء، الحل، التصفية)</li>
+      <li>التسوية القضائية والإفلاس</li>
+      <li>منازعات البنوك والمؤسسات المالية مع التجار</li>
+      <li>المنازعات البحرية والنقل الجوي والتأمينات التجارية</li>
+      <li>منازعات التجارة الدولية</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--purple)"></span> رابعاً: الأقطاب القضائية الجزائية</div>
+
+    <div class="sec">الأقطاب الإقليمية</div>
+    <p class="body">تمديد اختصاص وكيل الجمهورية وقاضي التحقيق والمحكمة لدوائر أخرى في: المخدرات، التهريب، الاتجار بالبشر والأعضاء، تهريب المهاجرين، الاختطاف، المضاربة غير المشروعة.</p>
+
+    <div class="sec">الأقطاب الجزائية الوطنية الثلاثة</div>
+    <p class="body">على مستوى محكمة مقر مجلس قضاء الجزائر — صلاحيات وطنية تشمل كامل التراب:</p>
+    <div class="grid3">
+      <div class="mini">
+        <strong>أ. اقتصادي ومالي</strong>
+        <span>جرائم الفساد، الجرائم الاقتصادية والمالية</span>
+      </div>
+      <div class="mini">
+        <strong>ب. تكنولوجيا المعلومات</strong>
+        <span>جرائم الفضاء الإلكتروني، الأخبار الكاذبة، الجرائم الماسة بأمن الدولة</span>
+      </div>
+      <div class="mini">
+        <strong>ج. الإرهاب والجريمة المنظمة</strong>
+        <span>مكافحة الإرهاب والجريمة المنظمة عبر الوطنية</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADMIN ===== -->
+<div id="p-admin" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> القضاء الإداري — هيكل عام</div>
+    <div class="pyramid">
+      <div class="prow" style="width:60%;background:rgba(108,143,255,0.12);color:var(--accent);border:0.5px solid rgba(108,143,255,0.25)">👑 مجلس الدولة — قمة الهرم الإداري</div>
+      <div class="prow" style="width:78%;background:var(--bg3);color:var(--text2);border:0.5px solid var(--border)">المحاكم الإدارية الاستئنافية (6 محاكم)</div>
+      <div class="prow" style="width:95%;background:var(--bg3);color:var(--text2);border:0.5px solid var(--border)">المحاكم الإدارية — درجة أولى</div>
+    </div>
+    <div class="hl-blue">الفارق الجوهري عن القضاء العادي: محافظ الدولة بدلاً من وكيل الجمهورية + تشكيلة جماعية دائماً</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> المحاكم الإدارية <span class="badge badge-blue">درجة أولى</span></div>
+    <p class="body">صاحبة الولاية العامة في المنازعات الإدارية. تشكيلة: 3 قضاة على الأقل (رئيس + مساعدان برتبة مستشار).</p>
+
+    <div class="sec">التشكيلة البشرية</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>قضاة الحكم</strong>
+        <span>الرئيس، نائب الرئيس، رؤساء الأقسام، رؤساء الفروع، قضاة العرائض، قضاة محضري الأحكام</span>
+      </div>
+      <div class="mini">
+        <strong>محافظة الدولة</strong>
+        <span>محافظ الدولة + محافظ مساعد. يشرف على كتابة الضبط مع الرئيس.</span>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:.85rem">الاختصاص النوعي</div>
+    <ul>
+      <li>دعاوى الدولة، الولاية، البلدية، المؤسسات العمومية الإدارية كطرف</li>
+      <li>دعوى إلغاء وتفسير وفحص مشروعية قرارات الولاية، البلدية، المنظمات المهنية الجهوية</li>
+      <li>دعاوى القضاء الكامل والتعويض</li>
+      <li>القضايا المخولة لها بنصوص خاصة</li>
+    </ul>
+    <div class="hl">⚠️ استثناء: المحاكم العادية تختص بـ: مخالفات الطرق، المسؤولية عن أضرار مركبات الدولة والجماعات المحلية</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> المحاكم الإدارية الاستئنافية <span class="badge badge-green">درجة ثانية</span></div>
+    <p class="body"><strong>6 محاكم:</strong> الجزائر العاصمة، قسنطينة، وهران، ورقلة، بشار، تمنراست.</p>
+    <p class="body">تشكيلة: 3 قضاة (رئيس برتبة مستشار بمجلس الدولة + مساعدان) + محافظة الدولة.</p>
+
+    <div class="sec">الاختصاص النوعي</div>
+    <ul>
+      <li>استئناف الأحكام والأوامر الصادرة عن المحاكم الإدارية</li>
+      <li>الفصل في تنازع الاختصاص بين محكمتين إداريتين في دائرتها</li>
+      <li>إعداد التقارير السنوية وإرسالها لمجلس الدولة</li>
+    </ul>
+    <div class="hl">
+      <strong>⚠️ خاص — المحكمة الإدارية الاستئنافية للجزائر:</strong><br>
+      تختص كأول درجة في دعاوى إلغاء قرارات السلطات الإدارية المركزية والهيئات الوطنية والمنظمات المهنية الوطنية
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--red)"></span> مجلس الدولة <span class="badge badge-red">قمة الهرم الإداري</span></div>
+    <p class="body">هيئة مقومة لأعمال الجهات القضائية الإدارية. يضمن توحيد الاجتهاد القضائي الإداري.</p>
+
+    <div class="sec">التشكيلة</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>القضاة</strong>
+        <span>رئيس مجلس الدولة، نائب الرئيس، رؤساء الغرف، رؤساء الأقسام، مستشارو الدولة</span>
+      </div>
+      <div class="mini">
+        <strong>محافظة الدولة</strong>
+        <span>محافظ الدولة + محافظو الدولة المساعدون</span>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:.85rem">الغرف الخاصة</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>الغرف المجتمعة</strong>
+        <span>للحالات الضرورية — خاصة إذا سيشكل القرار تراجعاً عن اجتهاد قضائي. لا تصح إلا بحضور نصف الأعضاء + المستشار المقرر.</span>
+      </div>
+      <div class="mini">
+        <strong>الغرف والأقسام العادية</strong>
+        <span>للقضايا العادية. لا تصح إلا بحضور 3 أعضاء على الأقل.</span>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:.85rem">الاختصاصات</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>قضائي</strong>
+        <span>استئناف قرارات المحكمة الاستئنافية للجزائر في دعاوى الإلغاء + طعون بالنقض ضد الأحكام النهائية للجهات الإدارية</span>
+      </div>
+      <div class="mini">
+        <strong>استشاري</strong>
+        <span>يبدي رأيه في مشاريع القوانين والأوامر. يقترح تعديلات. يرأسها رئيس مجلس الدولة + محافظ الدولة + رؤساء الغرف + 3 مستشارين. تصح بحضور نصف الأعضاء.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONFLICT ===== -->
+<div id="p-conflict" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> محكمة التنازع <span class="badge badge-red">فاصلة بين القضائين</span></div>
+    <p class="body">تختص في الفصل في <strong>منازعات الاختصاص بين القضاء العادي والإداري فقط</strong> — لا تختص في تنازع الاختصاص داخل النظام الواحد.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--purple)"></span> التشكيلة البشرية (9 قضاة)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>العضو</th><th>طريقة التعيين</th><th>المدة</th></tr>
+        <tr><td>الرئيس</td><td>رئيس الجمهورية باقتراح المجلس الأعلى للقضاء — بالتناوب بين المحكمة العليا ومجلس الدولة</td><td>5 سنوات</td></tr>
+        <tr><td>4 قضاة من المحكمة العليا</td><td>رئيس الجمهورية باقتراح المكتب الدائم للمجلس الأعلى للقضاء</td><td>5 سنوات</td></tr>
+        <tr><td>4 قضاة من مجلس الدولة</td><td>رئيس الجمهورية باقتراح المكتب الدائم للمجلس الأعلى للقضاء</td><td>5 سنوات</td></tr>
+        <tr><td>محافظ الدولة (ومساعده)</td><td>رئيس الجمهورية بالتناوب — بنفس الإجراء</td><td>5 سنوات</td></tr>
+      </table>
+    </div>
+    <div class="hl">شرط صحة المداولة: 5 قضاة على الأقل من بينهم قاضيان من المحكمة العليا + قاضيان من مجلس الدولة</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span> اختصاصات محكمة التنازع</div>
+    <div class="grid2">
+      <div class="mini">
+        <strong>تنازع إيجابي</strong>
+        <span>قضت جهتان (عادية + إدارية) باختصاصهما معاً بشأن نفس النزاع، نفس صفة الأطراف، نفس السبب والموضوع</span>
+      </div>
+      <div class="mini">
+        <strong>تنازع سلبي</strong>
+        <span>قضت جهتان (عادية + إدارية) بعدم اختصاصهما معاً بشأن نفس النزاع</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--amber)"></span> الإجراءات أمام محكمة التنازع</div>
+
+    <div class="sec">سير الإجراءات</div>
+    <ul>
+      <li>إذا لاحظ قاضٍ أن قراره سيؤدي لتناقض أحكام بين نظامين: يُحيل الملف بـ<strong>قرار مسبب غير قابل لأي طعن</strong> لمحكمة التنازع</li>
+      <li>يتوقف الإجراءات حتى يصدر قرار محكمة التنازع</li>
+      <li>إذا قدّرت أن جهة الإحالة غير مختصة: تقضي بإلغاء الأحكام والإجراءات الناتجة عنها</li>
+      <li>إذا قدّرت أن الجهة الأخرى أخطأت في الحكم بعدم الاختصاص: تقضي بإلغاء ذلك الحكم وتحيل النزاع للنظر فيه</li>
+    </ul>
+
+    <div class="sec" style="margin-top:.85rem">رفع النزاع</div>
+    <p class="body">بعريضة ورقية أو إلكترونية تُسجَّل لدى أمانة الضبط</p>
+
+    <div class="hl">
+      <strong>⚠️ قرارات محكمة التنازع:</strong><br>
+      — <strong>ملزمة</strong> لقضاة النظامين العادي والإداري<br>
+      — <strong>غير قابلة لأي طعن</strong> بأي طريق كان
+    </div>
+  </div>
+</div>
+
+<!-- ===== Q&A ===== -->
+<div id="p-qa" class="panel">
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> 🎯 أسئلة محتملة في الامتحان — مع الإجابات الكاملة</div>
+    <p class="body" style="margin-bottom:1rem">اختبر نفسك: فكّر في الإجابة ثم اضغط على السؤال لتظهر:</p>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما الفرق بين المحكمة العليا ومحكمة الاستئناف (المجلس القضائي)؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">المحكمة العليا محكمة <strong>قانون لا وقائع</strong> — تراقب صحة تطبيق القانون فقط (جهة نقض). المجلس القضائي هو جهة الاستئناف (درجة ثانية) ينظر في وقائع القضية وقانونها معاً. المحكمة العليا لا تتصل بالموضوع إلا استثناءً بموجب م.374 إ.م.إ.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>متى تصبح المحكمة العليا محكمة موضوع؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">بموجب المادة 374 إ.م.إ.:<br>— <strong>جوازاً:</strong> بعد طعن ثانٍ بالنقض (يجوز لها الفصل في الموضوع)<br>— <strong>وجوباً:</strong> عند الطعن بالنقض للمرة الثالثة (يجب عليها الفصل في الموضوع)</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما مهام غرفة الاتهام التسع؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">① مراقبة أعمال الضبطية القضائية<br>② البت في طلبات رد الاعتبار<br>③ الإشراف على مكاتب التحقيق ومراقبة الحبس المؤقت<br>④ مراجعة إجراءات التحقيق والبت في البطلان<br>⑤ البت في تنازع الاختصاص بين قضاة التحقيق<br>⑥ النظر في استئناف أوامر قضاة التحقيق<br>⑦ الإحالة على محكمة الجنايات كدرجة ثانية للتحقيق في الجنايات<br>⑧ الإشراف على الحبس المؤقت ومراكز الاحتجاز<br>⑨ البت في الإخلالات المهنية للضبطية القضائية</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما الفرق بين الاختصاص الاختياري والوجوبي للمحكمة؟</span><span class="arr">▼</span></div>
+      <div class="qa-a"><strong>الاختياري (م.39):</strong> يجوز للخصوم الاختيار — الدعاوى المختلطة، التعويض، المنازعات التجارية غير الإفلاس...<br><strong>الوجوبي (م.40):</strong> لا يجوز اللجوء لجهة أخرى — العقار، الميراث، الإفلاس، الملكية الفكرية، الخدمات الطبية، الحجز...</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما شرط رفع الدعوى أمام القسم الاجتماعي؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">يجب رفع الدعوى في أجل لا يتعدى <strong>6 أشهر</strong> من تاريخ تسليم محضر عدم الصلح أمام مفتشية العمل المختصة إقليمياً. إجراءات الصلح وجوبية مسبقة.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما الفرق بين التنازع الإيجابي والسلبي في محكمة التنازع؟</span><span class="arr">▼</span></div>
+      <div class="qa-a"><strong>الإيجابي:</strong> قضت الجهتان (العادية والإدارية) باختصاصهما معاً بشأن نفس النزاع.<br><strong>السلبي:</strong> قضت الجهتان بعدم اختصاصهما معاً بشأن نفس النزاع.<br>يجب في الحالتين: نفس النزاع، نفس الأطراف، نفس السبب والموضوع.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>كم عدد المحاكم الإدارية الاستئنافية وأين تقع؟</span><span class="arr">▼</span></div>
+      <div class="qa-a"><strong>6 محاكم:</strong> الجزائر العاصمة، قسنطينة، وهران، ورقلة، بشار، تمنراست.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما المقصود بالأقطاب الجزائية الوطنية الثلاثة؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">3 أقطاب على مستوى محكمة مقر مجلس قضاء الجزائر بصلاحيات وطنية:<br><strong>أ)</strong> الجرائم الاقتصادية والمالية (الفساد)<br><strong>ب)</strong> جرائم تكنولوجيا المعلومات والاتصال والأخبار الكاذبة<br><strong>ج)</strong> مكافحة الإرهاب والجريمة المنظمة عبر الوطنية</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما تشكيلة محكمة التنازع وشروط صحة مداولتها؟</span><span class="arr">▼</span></div>
+      <div class="qa-a"><strong>التشكيلة:</strong> 9 قضاة معيّنون لمدة 5 سنوات — رئيس بالتناوب، 4 من المحكمة العليا، 4 من مجلس الدولة، ومحافظ الدولة.<br><strong>شرط المداولة:</strong> 5 قضاة على الأقل (قاضيان من كل جهة على الأقل).</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما الفرق بين الجرائم العسكرية المحضة والمشتركة؟</span><span class="arr">▼</span></div>
+      <div class="qa-a"><strong>المحضة:</strong> ينص عليها قانون القضاء العسكري وحده (عصيان، فرار...) — حصرياً للقضاء العسكري.<br><strong>المشتركة:</strong> ينص عليها قانون العسكري وقانون العقوبات معاً (سرقة، تزوير...) — إذا نظرت إحدى الجهتين تتخلى الأخرى تلقائياً لأنه لا تجوز محاكمة شخص مرتين على نفس الفعل.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما اختصاص المحكمة الإدارية الاستئنافية للجزائر كدرجة أولى؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">تختص بالفصل كدرجة أولى في دعاوى إلغاء وتفسير وتقدير مشروعية القرارات الإدارية الصادرة عن <strong>السلطات الإدارية المركزية</strong> والهيئات العمومية الوطنية والمنظمات المهنية الوطنية.</div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-q" onclick="toggleQA(this)"><span>ما دور مجلس الدولة الاستشاري؟</span><span class="arr">▼</span></div>
+      <div class="qa-a">يُنظَّم كلجنة استشارية يرأسها رئيس مجلس الدولة (+ محافظ الدولة + رؤساء الغرف + 3 مستشارين). يبدي رأيه في مشاريع القوانين والأوامر المحالة إليه، ويقترح التعديلات الضرورية. تصح اجتماعاتها بحضور نصف الأعضاء.</div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  التنظيم القضائي الجزائري — القانون العضوي 22/10 &nbsp;|&nbsp; مراجعة شاملة &nbsp;|&nbsp; بالتوفيق في الامتحان 💪
+</footer>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleQA(el) {
+  const qa = el.closest('.qa');
+  const isOpen = qa.classList.contains('open');
+  document.querySelectorAll('.qa.open').forEach(q => q.classList.remove('open'));
+  if (!isOpen) qa.classList.add('open');
+}
+</script>
+</body>
+</html>
